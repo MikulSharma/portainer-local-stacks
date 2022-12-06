@@ -1,0 +1,18 @@
+version: '3'
+services:
+  postgres14-01:
+    restart: unless-stopped
+    image: postgres:14
+    command: postgres -c max_connections=900
+    container_name: postgres14-01
+    ports:
+        - 5432:5432
+    environment:
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?err}
+    deploy:
+        resources:
+            limits:
+              cpus: '2'
+              memory: 8G
+              
+    network_mode: "host"
